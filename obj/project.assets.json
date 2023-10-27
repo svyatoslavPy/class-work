@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/georgievsvyatoslav/RiderProjects/class-work/class-work/class-work.csproj",
+      "projectUniqueName": "/Users/georgievsvyatoslav/Downloads/untitled folder 3/class-work.csproj",
       "projectName": "class-work",
-      "projectPath": "/Users/georgievsvyatoslav/RiderProjects/class-work/class-work/class-work.csproj",
+      "projectPath": "/Users/georgievsvyatoslav/Downloads/untitled folder 3/class-work.csproj",
       "packagesPath": "/Users/georgievsvyatoslav/.nuget/packages/",
-      "outputPath": "/Users/georgievsvyatoslav/RiderProjects/class-work/class-work/obj/",
+      "outputPath": "/Users/georgievsvyatoslav/Downloads/untitled folder 3/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/georgievsvyatoslav/.nuget/NuGet/NuGet.Config"
