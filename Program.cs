@@ -7,8 +7,8 @@ namespace ClassWork
         static void Main(string[] args)
         {
             string message = "Hello World!!";
-
-            Console.WriteLine(message);
+            int age = 18;
+            Console.WriteLine(message, age);
         }
     }
 }
