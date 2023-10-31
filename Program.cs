@@ -87,7 +87,7 @@ namespace ClassWork
             int salaryTrade = managerSumTrade / 100 * 5;
             int salaryManager = 100 + salaryTrade;
             Console.WriteLine(salaryManager);
-
+            Console.WriteLine("Change from develop");
             Console.WriteLine(1 + 1);
         }
     }
