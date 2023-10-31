@@ -12,3 +12,17 @@
 /Users/georgievsvyatoslav/RiderProjects/class-work/class-work/obj/Debug/net7.0/class-work.pdb
 /Users/georgievsvyatoslav/RiderProjects/class-work/class-work/obj/Debug/net7.0/class-work.genruntimeconfig.cache
 /Users/georgievsvyatoslav/RiderProjects/class-work/class-work/obj/Debug/net7.0/ref/class-work.dll
+/Users/georgievsvyatoslav/Downloads/untitled folder 3/obj/Debug/net7.0/class-work.GeneratedMSBuildEditorConfig.editorconfig
+/Users/georgievsvyatoslav/Downloads/untitled folder 3/obj/Debug/net7.0/class-work.AssemblyInfoInputs.cache
+/Users/georgievsvyatoslav/Downloads/untitled folder 3/obj/Debug/net7.0/class-work.AssemblyInfo.cs
+/Users/georgievsvyatoslav/Downloads/untitled folder 3/obj/Debug/net7.0/class-work.csproj.CoreCompileInputs.cache
+/Users/georgievsvyatoslav/Downloads/untitled folder 3/obj/Debug/net7.0/class-work.dll
+/Users/georgievsvyatoslav/Downloads/untitled folder 3/obj/Debug/net7.0/refint/class-work.dll
+/Users/georgievsvyatoslav/Downloads/untitled folder 3/obj/Debug/net7.0/class-work.pdb
+/Users/georgievsvyatoslav/Downloads/untitled folder 3/bin/Debug/net7.0/class-work
+/Users/georgievsvyatoslav/Downloads/untitled folder 3/bin/Debug/net7.0/class-work.deps.json
+/Users/georgievsvyatoslav/Downloads/untitled folder 3/bin/Debug/net7.0/class-work.runtimeconfig.json
+/Users/georgievsvyatoslav/Downloads/untitled folder 3/bin/Debug/net7.0/class-work.dll
+/Users/georgievsvyatoslav/Downloads/untitled folder 3/bin/Debug/net7.0/class-work.pdb
+/Users/georgievsvyatoslav/Downloads/untitled folder 3/obj/Debug/net7.0/class-work.genruntimeconfig.cache
+/Users/georgievsvyatoslav/Downloads/untitled folder 3/obj/Debug/net7.0/ref/class-work.dll
