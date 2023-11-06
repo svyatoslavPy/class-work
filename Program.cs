@@ -4,182 +4,181 @@ namespace ClassWork
 {
     class Program
     {
+        enum CalcOperations
+        {
+            Plus = '+',
+            Minus = '-',
+            Myltiply = '*',
+            Division = '/'
+        }
+
+        enum CodePizza
+        {
+            Margaritha = 3,
+            Spicy = 2,
+            Mexico = 4
+        }
+
+        enum PricePizza
+        {
+            Margaritha = 8,
+            Spicy = 9,
+            Mexico = 10
+        }
 
         static void Main(string[] args)
         {
-            // TASK 1
-            
-            /*Console.WriteLine("Введите 5 оценок студента: ");
-            int mark1 = Convert.ToInt32(Console.ReadLine());
-            int mark2 = Convert.ToInt32(Console.ReadLine());
-            int mark3 = Convert.ToInt32(Console.ReadLine());
-            int mark4 = Convert.ToInt32(Console.ReadLine());
-            int mark5 = Convert.ToInt32(Console.ReadLine());
-            int sum = 0;
-            int averageMark = 0;
-            
-            List<int> marks = new List<int>(); //  {} инициализация по умолчанию
-            
-            // добавляем оценки в массив всех оценок студента
-            marks.AddRange(new [] 
+            // task 1
+            try
             {
-                mark1, mark2, mark3, mark4, mark5
-            });
+                Console.Write("Введите первое число: ");
+                int firstNum = Convert.ToInt32(Console.ReadLine());
 
-            foreach (int item in marks) // через foreach пробегаемся по коллекции и суммируем
-            {
-                sum += item;
+                Console.Write("Введите второе число: ");
+                int secondNum = Convert.ToInt32(Console.ReadLine());
+
+                Console.Write("Выберите операцию: ( +, /, */ - ): ");
+                char operation = Convert.ToChar(Console.ReadLine() ?? string.Empty);
+
+                switch (operation)
+                {
+                    case (char)CalcOperations.Plus:
+                        Console.WriteLine(firstNum + secondNum);
+                        break;
+                    case (char)CalcOperations.Minus:
+                        Console.WriteLine(firstNum - secondNum);
+                        break;
+                    case (char)CalcOperations.Division:
+                        if (secondNum == 0)
+                        {
+                            throw new DivideByZeroException("You dont divide at zero, please!!!");
+                        }
+
+                        Console.WriteLine(firstNum / secondNum);
+                        break;
+                    case (char)CalcOperations.Myltiply:
+                        Console.WriteLine(firstNum * secondNum);
+                        break;
+                    default:
+                        throw new Exception("Not correctly this operation");
+                }
             }
-            
-
-            averageMark = sum / marks.Count;
-            if (averageMark >= 4)
+            catch (DivideByZeroException ex)
             {
-                Console.WriteLine("Студента допущено к экзамену");
+                Console.WriteLine(ex);
             }
-            else
+            catch (Exception ex)
             {
-                Console.WriteLine("К сожалению студента не допущено к экзамену");
-            }*/
-            
-            
-             Console.WriteLine("Введите 5 оценок студента: ");
-            int mark1 = Convert.ToInt32(Console.ReadLine());
-            int mark2 = Convert.ToInt32(Console.ReadLine());
-            int mark3 = Convert.ToInt32(Console.ReadLine());
-            int mark4 = Convert.ToInt32(Console.ReadLine());
-            int mark5 = Convert.ToInt32(Console.ReadLine());
-            
-            int sum = mark1 + mark2 + mark3 + mark4 + mark5;
-            int averageMark = sum / 5;
-
-
-            if (averageMark >= 4)
-            {
-                Console.WriteLine("Студента допущено к экзамену");
-            }
-            else
-            {
-                Console.WriteLine("К сожалению студента не допущено к экзамену");
+                Console.WriteLine(ex);
             }
 
-            Console.WriteLine("-----------");
-            
             // TASK 2
-            Console.WriteLine("Введите число: ");
-            int userNumber = Convert.ToInt32(Console.ReadLine());
-            int result = 0;
-            
-            if (userNumber % 2 == 0)
+
+            Console.WriteLine("Welcome to our pizza cafe! ");
+            Console.Write("Are you need menu for choise pizza ( Yes or No ): ");
+
+            static void PrintMenu()
             {
-                result = userNumber * 3;
+                Console.WriteLine("Menu");
+                Console.WriteLine("Pizza: ");
+                Console.WriteLine("Pizza Margaritha, code - 3");
+                Console.WriteLine("Pizza Spicy, code - 2");
+                Console.WriteLine("Pizza Mexico, code - 4");
+                Console.WriteLine("Drinks: ");
+                Console.WriteLine("Coca-cola, code - 1");
+                Console.WriteLine("Sprite, code - 2");
+                Console.WriteLine("Fanta, code - 3");
+            }
+
+            
+            static void Menu()
+            {
+                try
+                {
+                    PrintMenu();
+                    Console.Write("Enter a code for choise pizza: ");
+                    int choisePizza = Convert.ToInt32(Console.ReadLine());
+
+                    Console.Write("Enter a quantity pizza: ");
+                    int quantity = Convert.ToInt32(Console.ReadLine());
+
+                    Console.Write("Enter a code for choise drink: ");
+                    int choiseDrink = Convert.ToInt32(Console.ReadLine());
+
+                    double resultPrice = 0;
+                    double discount = 0;
+                    string namePizza = string.Empty;
+
+                    if (choisePizza == (int)CodePizza.Margaritha)
+                    {
+                        resultPrice = quantity * (int)PricePizza.Margaritha;
+                        namePizza = "Pizza Margaritha";
+                    }
+                    else if (choisePizza == (int)CodePizza.Spicy)
+                    {
+                        resultPrice = quantity * (int)PricePizza.Spicy;
+                        namePizza = "Pizza Spicy";
+                    }
+                    else if (choisePizza == (int)CodePizza.Mexico)
+                    {
+                        resultPrice = quantity * (int)PricePizza.Mexico;
+                        namePizza = "Pizza Mexico";
+                    }
+                    else
+                    {
+                        throw new Exception("Not correctly code");
+                    }
+
+                    if (choiseDrink > 0)
+                    {
+                        if (choiseDrink == 1)
+                        {
+                            resultPrice += 2;
+                        }
+                        else if (choiseDrink == 2)
+                        {
+                            resultPrice += 1.5;
+                        }
+                        else if (choiseDrink == 3)
+                        {
+                            resultPrice += 2.5;
+                        }
+                        else
+                        {
+                            throw new Exception("Not correctly code");
+                        }
+                    }
+
+                    if (resultPrice > 50)
+                    {
+                        discount = resultPrice / 100 * 20;
+                    }
+
+                    if (quantity % 5 == 0)
+                    {
+                        quantity += 1;
+                    }
+
+                    Console.WriteLine($"Name - {namePizza}, Quantity - {quantity}, Price - {resultPrice - discount}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+            }
+
+            string choise = Console.ReadLine() ?? string.Empty;
+            bool showMenu = choise.ToLower() == "yes";
+
+
+            if (showMenu)
+            {
+                Menu();
             }
             else
             {
-                result = userNumber / 2;
+                Console.WriteLine("When you are ready to order, say to me");
             }
-
-            Console.WriteLine($"Результат {result}");
-            Console.WriteLine("-----------");
-            
-            // TASK 3 ( CALC )
-            Console.Write("Введите первое число для расчета: ");
-            int calcFirstNum = Convert.ToInt32(Console.ReadLine());
-            
-            Console.Write("Введите второе число для расчета: ");
-            int calcSecondNum = Convert.ToInt32(Console.ReadLine());
-            
-            Console.Write("Введите операцию (знак) для расчета: ");
-            string calcOperation = Console.ReadLine() ?? string.Empty;
-            
-            void Calc(int firstNum, int secondNum, string operation)
-            {
-                if (operation == "+")
-                {
-                    Console.WriteLine(firstNum + secondNum);
-                } 
-                else if (operation == "-")
-                {
-                    Console.WriteLine(firstNum - secondNum);
-                } 
-                else if (operation == "*")
-                {
-                    Console.WriteLine(firstNum * secondNum);
-                }
-                else if (operation == "/")
-                {
-                    Console.WriteLine(firstNum / secondNum);
-                }
-                else
-                {
-                    Console.WriteLine("Неверная операция, повторите еще раз");
-                }
-            }
-
-            Calc(calcFirstNum, calcSecondNum, calcOperation);
-
-
-
-            // Дополнительные задания
-            Console.WriteLine("Введите уровень продаж для 3 менеджеров: ");
-            int manager1 = Convert.ToInt32(Console.ReadLine());
-            int manager2 = Convert.ToInt32(Console.ReadLine());
-            int manager3 = Convert.ToInt32(Console.ReadLine());
-            int managerSalary1 = 0, managerSalary2 = 0, managerSalary3 = 0;
-
-            int CalcSalaryManagers(int manager) // функция - это именованный блок кода который выполняет определенное действие и решает проблему переиспользование кода 
-            {
-                if (manager <= 500)
-                {
-                    return 200 + (manager / 100 * 3);
-                }
-
-                // ReSharper disable once ConditionIsAlwaysTrueOrFalse
-                if (manager >= 500 && manager <= 1000)
-                {
-                    return 200 + (manager / 100 * 5);
-                }
-                
-                // ReSharper disable once ConditionIsAlwaysTrueOrFalse
-                if (manager > 1000)
-                {
-                    return 200 + (manager / 100 * 8);
-                }
-
-                return 0;
-            }
-            // (mager1 > manager2) && (manager2 > manager3) || (mana
-            managerSalary1 = CalcSalaryManagers(manager1); 
-            managerSalary2 = CalcSalaryManagers(manager2); 
-            managerSalary3 = CalcSalaryManagers(manager3); 
-
-            string bestManager = String.Empty;
-            
-            if (manager1 >= manager2 && manager3 <= manager2 && manager2 <= manager3)
-            {
-                managerSalary1 += 200;
-                bestManager = "Первый";
-            } 
-            else if (manager2 >= manager1 && manager3 <= manager2)
-            {
-                managerSalary2 += 200;
-                bestManager = "Второй";
-            } 
-            else if (manager3 >= manager2 && manager1 <= manager2)
-            {
-                managerSalary3 += 200;
-                bestManager = "Третий";
-            }
-
-            Console.WriteLine("Лучший менеджер: " + "" + bestManager);
-            
-            Console.WriteLine("Зарплата первого менеджера - " + "" + managerSalary1);
-            Console.WriteLine("Зарплата второго менеджера - " + "" + managerSalary2);
-            Console.WriteLine("Зарплата третьего менеджера - " + "" + managerSalary3);
-            
-            
-
-
         }
     }
 }
