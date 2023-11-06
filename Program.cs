@@ -18,13 +18,29 @@ namespace ClassWork
             Spicy = 2,
             Mexico = 4
         }
-
+        
         enum PricePizza
         {
             Margaritha = 8,
             Spicy = 9,
             Mexico = 10
         }
+
+        enum CodeDrinks
+        {   
+            Cola = 1,
+            Sprite = 2,
+            Fanta = 3
+        }
+
+        enum PriceDrinks
+        {
+            Cola = 2,
+            Sprite = 1,
+            Fanta = 3
+        }
+        
+   
 
         static void Main(string[] args)
         {
@@ -131,17 +147,17 @@ namespace ClassWork
 
                     if (choiseDrink > 0)
                     {
-                        if (choiseDrink == 1)
+                        if (choiseDrink == (int)CodeDrinks.Cola)
                         {
-                            resultPrice += 2;
+                            resultPrice += (int)PriceDrinks.Cola;
                         }
-                        else if (choiseDrink == 2)
+                        else if (choiseDrink == (int)CodeDrinks.Sprite)
                         {
-                            resultPrice += 1.5;
+                            resultPrice += (int)PriceDrinks.Sprite;
                         }
-                        else if (choiseDrink == 3)
+                        else if (choiseDrink == (int)CodeDrinks.Fanta)
                         {
-                            resultPrice += 2.5;
+                            resultPrice += (int)PriceDrinks.Fanta;
                         }
                         else
                         {
