@@ -4,97 +4,197 @@ namespace ClassWork
 {
     class Program
     {
+        enum CalcOperations
+        {
+            Plus = '+',
+            Minus = '-',
+            Myltiply = '*',
+            Division = '/'
+        }
+
+        enum CodePizza
+        {
+            Margaritha = 3,
+            Spicy = 2,
+            Mexico = 4
+        }
+        
+        enum PricePizza
+        {
+            Margaritha = 8,
+            Spicy = 9,
+            Mexico = 10
+        }
+
+        enum CodeDrinks
+        {   
+            Cola = 1,
+            Sprite = 2,
+            Fanta = 3
+        }
+
+        enum PriceDrinks
+        {
+            Cola = 2,
+            Sprite = 1,
+            Fanta = 3
+        }
+        
+   
 
         static void Main(string[] args)
         {
-
-            string message = "Hello World!!";
-            Console.WriteLine(1 + 5);
-            Console.WriteLine(message);
-            Console.WriteLine(1 + 5);
-
-            string ShowNumbers(params int[] numbers)
-            {
-                string num = "";
-                foreach (int i in numbers)
-                {
-                    num += i;
-                }
-
-                return num;
-            }
-            
             // task 1
-            Console.Write("Enter a second num: ");
-            int num1 = Convert.ToInt32(Console.ReadLine());
-            
-            Console.Write("Enter a second num: ");
-            int num2 = Convert.ToInt32(Console.ReadLine());
-            
-            Console.Write("Enter a third num: ");
-            int num3 = Convert.ToInt32(Console.ReadLine());;
-            
-            Console.Write("Enter a fourth num: ");
-            int num4 = Convert.ToInt32(Console.ReadLine());;
-            
+            try
+            {
+                Console.Write("Введите первое число: ");
+                int firstNum = Convert.ToInt32(Console.ReadLine());
 
-            string result = ShowNumbers(num1, num2, num3, num4);
-            Console.WriteLine(result);
-            
-            
-            // task 2
-            // reverse сделать числа 
-            Console.WriteLine("Введите шестизначное число: ");
-            int numbers = Convert.ToInt32(Console.ReadLine());
-            char[] reverseNumber = Convert.ToString(numbers).ToCharArray();
-            Array.Reverse(reverseNumber);
-            string reversed = string.Join("", reverseNumber);
-            Console.WriteLine(reversed);
+                Console.Write("Введите второе число: ");
+                int secondNum = Convert.ToInt32(Console.ReadLine());
+
+                Console.Write("Выберите операцию: ( +, /, */ - ): ");
+                char operation = Convert.ToChar(Console.ReadLine() ?? string.Empty);
+
+                switch (operation)
+                {
+                    case (char)CalcOperations.Plus:
+                        Console.WriteLine(firstNum + secondNum);
+                        break;
+                    case (char)CalcOperations.Minus:
+                        Console.WriteLine(firstNum - secondNum);
+                        break;
+                    case (char)CalcOperations.Division:
+                        if (secondNum == 0)
+                        {
+                            throw new DivideByZeroException("You dont divide at zero, please!!!");
+                        }
+
+                        Console.WriteLine(firstNum / secondNum);
+                        break;
+                    case (char)CalcOperations.Myltiply:
+                        Console.WriteLine(firstNum * secondNum);
+                        break;
+                    default:
+                        throw new Exception("Not correctly this operation");
+                }
+            }
+            catch (DivideByZeroException ex)
+            {
+                Console.WriteLine(ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+            // TASK 2
+
+            Console.WriteLine("Welcome to our pizza cafe! ");
+            Console.Write("Are you need menu for choise pizza ( Yes or No ): ");
+
+            static void PrintMenu()
+            {
+                Console.WriteLine("Menu");
+                Console.WriteLine("Pizza: ");
+                Console.WriteLine("Pizza Margaritha, code - 3");
+                Console.WriteLine("Pizza Spicy, code - 2");
+                Console.WriteLine("Pizza Mexico, code - 4");
+                Console.WriteLine("Drinks: ");
+                Console.WriteLine("Coca-cola, code - 1");
+                Console.WriteLine("Sprite, code - 2");
+                Console.WriteLine("Fanta, code - 3");
+            }
 
             
-            // доп задания
-            Console.WriteLine("Enter a first number with user");
-            int userNum1 = Convert.ToInt32(Console.ReadLine());
-            
-            Console.WriteLine("Enter a second number with user");
-            int userNum2 = Convert.ToInt32(Console.ReadLine());
-            
-            Console.WriteLine("Enter a three number with user");
-            int userNum3 = Convert.ToInt32(Console.ReadLine());
+            static void Menu()
+            {
+                try
+                {
+                    PrintMenu();
+                    Console.Write("Enter a code for choise pizza: ");
+                    int choisePizza = Convert.ToInt32(Console.ReadLine());
 
-            int sumUsers = userNum1 + userNum2 + userNum3;
-            int avarageMath = sumUsers / 3;
-            Console.WriteLine($"Cумма - {sumUsers}, medium avarage - {avarageMath}");
+                    Console.Write("Enter a quantity pizza: ");
+                    int quantity = Convert.ToInt32(Console.ReadLine());
 
-            // task 2
-            Console.WriteLine("Enter a price one laptop: ");
-            double priceLaptop = Convert.ToDouble(Console.ReadLine());
+                    Console.Write("Enter a code for choise drink: ");
+                    int choiseDrink = Convert.ToInt32(Console.ReadLine());
 
-            Console.WriteLine("Enter a quantity laptop: ");
-            int quantity = Convert.ToInt32(Console.ReadLine());
+                    double resultPrice = 0;
+                    double discount = 0;
+                    string namePizza = string.Empty;
 
-            Console.WriteLine("Enter a procent discount: ");
-            double discount = Convert.ToDouble(Console.ReadLine()); // 20%
-            
-            double products = (priceLaptop * quantity);
-            double discountResult = (products / 100) * discount;
-            double productsResult = products - discountResult;
-          
-            Console.WriteLine($"Ваша сумма корзины учитывая скидку - {productsResult}");
-            
-            
-            // task 3
-            //  Завдання 3.
-             // Зарплата менеджера - 100 $ + 5% від продажів. Користувач вводить з клавіатури загальну суму угод менеджера протягом місяця. Порахувати підсумкову зарплату менеджера. 
-             
-            Console.WriteLine("Введите сумму со сделок за месяц: ");
-            int managerSumTrade = Convert.ToInt32(Console.ReadLine());
-            
-            int salaryTrade = managerSumTrade / 100 * 5;
-            int salaryManager = 100 + salaryTrade;
-            Console.WriteLine(salaryManager);
-            Console.WriteLine("Change from develop");
-            Console.WriteLine(1 + 1);
+                    if (choisePizza == (int)CodePizza.Margaritha)
+                    {
+                        resultPrice = quantity * (int)PricePizza.Margaritha;
+                        namePizza = "Pizza Margaritha";
+                    }
+                    else if (choisePizza == (int)CodePizza.Spicy)
+                    {
+                        resultPrice = quantity * (int)PricePizza.Spicy;
+                        namePizza = "Pizza Spicy";
+                    }
+                    else if (choisePizza == (int)CodePizza.Mexico)
+                    {
+                        resultPrice = quantity * (int)PricePizza.Mexico;
+                        namePizza = "Pizza Mexico";
+                    }
+                    else
+                    {
+                        throw new Exception("Not correctly code");
+                    }
+
+                    if (choiseDrink > 0)
+                    {
+                        if (choiseDrink == (int)CodeDrinks.Cola)
+                        {
+                            resultPrice += (int)PriceDrinks.Cola;
+                        }
+                        else if (choiseDrink == (int)CodeDrinks.Sprite)
+                        {
+                            resultPrice += (int)PriceDrinks.Sprite;
+                        }
+                        else if (choiseDrink == (int)CodeDrinks.Fanta)
+                        {
+                            resultPrice += (int)PriceDrinks.Fanta;
+                        }
+                        else
+                        {
+                            throw new Exception("Not correctly code");
+                        }
+                    }
+
+                    if (resultPrice > 50)
+                    {
+                        discount = resultPrice / 100 * 20;
+                    }
+
+                    if (quantity % 5 == 0)
+                    {
+                        quantity += 1;
+                    }
+
+                    Console.WriteLine($"Name - {namePizza}, Quantity - {quantity}, Price - {resultPrice - discount}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+            }
+
+            string choise = Console.ReadLine() ?? string.Empty;
+            bool showMenu = choise.ToLower() == "yes";
+
+
+            if (showMenu)
+            {
+                Menu();
+            }
+            else
+            {
+                Console.WriteLine("When you are ready to order, say to me");
+            }
         }
     }
 }
