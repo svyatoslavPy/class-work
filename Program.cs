@@ -4,97 +4,134 @@ namespace ClassWork
 {
     class Program
     {
-
         static void Main(string[] args)
         {
-
-            string message = "Hello World!!";
-            Console.WriteLine(1 + 5);
-            Console.WriteLine(message);
-            Console.WriteLine(1 + 5);
-
-            string ShowNumbers(params int[] numbers)
+            // task 1
+            try
             {
-                string num = "";
-                foreach (int i in numbers)
+                int countNumberMultipleOfFive = 0;
+                int start = 0;
+                int end = 0;
+
+                do
                 {
-                    num += i;
+                    Console.Write("Enter a start: ");
+                    start = Convert.ToInt32(Console.ReadLine());
+
+                    Console.Write("Enter a end: ");
+                    end = Convert.ToInt32(Console.ReadLine());
+                } while ((start <= 0 || end <= 0));
+
+                Console.WriteLine("Number all in range: ");
+                for (int i = start; i <= end; i++)
+                {
+                    Console.WriteLine(i);
+
+                    if (i % 7 == 0)
+                    {
+                        Console.WriteLine(i);
+                    }
+
+                    if (i % 5 == 0)
+                    {
+                        countNumberMultipleOfFive++;
+                    }
                 }
 
-                return num;
+                Console.WriteLine($"Count number multiple of five - {countNumberMultipleOfFive}");
+                Console.WriteLine("Number less: ");
+
+                for (int i = end; i >= start; i--)
+                {
+                    Console.Write(i);
+                }
             }
-            
-            // task 1
-            Console.Write("Enter a second num: ");
-            int num1 = Convert.ToInt32(Console.ReadLine());
-            
-            Console.Write("Enter a second num: ");
-            int num2 = Convert.ToInt32(Console.ReadLine());
-            
-            Console.Write("Enter a third num: ");
-            int num3 = Convert.ToInt32(Console.ReadLine());;
-            
-            Console.Write("Enter a fourth num: ");
-            int num4 = Convert.ToInt32(Console.ReadLine());;
-            
+            catch (FormatException)
+            {
+                Console.WriteLine("Not correct, again write number");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
 
-            string result = ShowNumbers(num1, num2, num3, num4);
-            Console.WriteLine(result);
-            
-            
-            // task 2
-            // reverse сделать числа 
-            Console.WriteLine("Введите шестизначное число: ");
-            int numbers = Convert.ToInt32(Console.ReadLine());
-            char[] reverseNumber = Convert.ToString(numbers).ToCharArray();
-            Array.Reverse(reverseNumber);
-            string reversed = string.Join("", reverseNumber);
-            Console.WriteLine(reversed);
-
-            
-            // доп задания
-            Console.WriteLine("Enter a first number with user");
-            int userNum1 = Convert.ToInt32(Console.ReadLine());
-            
-            Console.WriteLine("Enter a second number with user");
-            int userNum2 = Convert.ToInt32(Console.ReadLine());
-            
-            Console.WriteLine("Enter a three number with user");
-            int userNum3 = Convert.ToInt32(Console.ReadLine());
-
-            int sumUsers = userNum1 + userNum2 + userNum3;
-            int avarageMath = sumUsers / 3;
-            Console.WriteLine($"Cумма - {sumUsers}, medium avarage - {avarageMath}");
 
             // task 2
-            Console.WriteLine("Enter a price one laptop: ");
-            double priceLaptop = Convert.ToDouble(Console.ReadLine());
+            try
+            {
+                Console.WriteLine();
+                Console.WriteLine("Enter a number: ");
 
-            Console.WriteLine("Enter a quantity laptop: ");
-            int quantity = Convert.ToInt32(Console.ReadLine());
+                int evenCount = 0;
+                int oddCount = 0;
+                int countNumberMultipleOfNine = 0;
+                int sumEven = 0;
+                int sumOdd = 0;
+                int sumMultipleOfNine = 0;
 
-            Console.WriteLine("Enter a procent discount: ");
-            double discount = Convert.ToDouble(Console.ReadLine()); // 20%
-            
-            double products = (priceLaptop * quantity);
-            double discountResult = (products / 100) * discount;
-            double productsResult = products - discountResult;
-          
-            Console.WriteLine($"Ваша сумма корзины учитывая скидку - {productsResult}");
-            
-            
-            // task 3
-            //  Завдання 3.
-             // Зарплата менеджера - 100 $ + 5% від продажів. Користувач вводить з клавіатури загальну суму угод менеджера протягом місяця. Порахувати підсумкову зарплату менеджера. 
-             
-            Console.WriteLine("Введите сумму со сделок за месяц: ");
-            int managerSumTrade = Convert.ToInt32(Console.ReadLine());
-            
-            int salaryTrade = managerSumTrade / 100 * 5;
-            int salaryManager = 100 + salaryTrade;
-            Console.WriteLine(salaryManager);
-            Console.WriteLine("Change from develop");
-            Console.WriteLine(1 + 1);
+
+                for (int i = 0; i < 2; i++)
+                {
+                    int number = Convert.ToInt32(Console.ReadLine());
+
+                    if (i % 2 == 0)
+                    {
+                        sumEven += number;
+                        evenCount++;
+                    }
+
+                    if (i % 2 != 0)
+                    {
+                        sumOdd += number;
+                        oddCount++;
+                    }
+
+                    if (i % 9 == 0)
+                    {
+                        sumMultipleOfNine += number;
+                        countNumberMultipleOfNine++;
+                    }
+                }
+
+                Console.WriteLine($"Even, sum - {sumEven}, avarage - {sumEven / evenCount}");
+                Console.WriteLine($"Odd, sum - {sumOdd}, avarage - {sumOdd / oddCount}");
+                Console.WriteLine(
+                    $"MultipleOfNine, sum - {sumMultipleOfNine}, avarage - {sumMultipleOfNine / countNumberMultipleOfNine}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+
+            // additionally
+            // task
+            try
+            {
+                Console.Write("Enter a number: ");
+                int n = Convert.ToInt32(Console.ReadLine());
+
+                while (true)
+                {
+                    if (n >= 100)
+                    {
+                        break;
+                    }
+
+                    Console.Write("Enter a number: ");
+                    n = Convert.ToInt32(Console.ReadLine());
+                }
+
+                for (int i = 0; i <= n; i++)
+                    if (i % n == 0 && i % 1 == 0)
+                    {
+                        Console.WriteLine(i);
+                    }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }
