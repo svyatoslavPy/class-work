@@ -1,100 +1,112 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace ClassWork
+namespace CSharpTutorials
 {
     class Program
     {
-
         static void Main(string[] args)
         {
-
-            string message = "Hello World!!";
-            Console.WriteLine(1 + 5);
-            Console.WriteLine(message);
-            Console.WriteLine(1 + 5);
-
-            string ShowNumbers(params int[] numbers)
+            // TASK 1
+            try
             {
-                string num = "";
-                foreach (int i in numbers)
+                int size = 6;
+                int[] salaryCompany = new int[size];
+                int sum = 0;
+                int countMonth = 6;
+
+                for (int i = 0; i < countMonth; i++)
                 {
-                    num += i;
+                    Console.Write("Enter a salary: ");
+                    int salary = Convert.ToInt32(Console.ReadLine());
+
+                    salaryCompany[i] = salary;
                 }
 
-                return num;
+                foreach (var item in salaryCompany)
+                {
+                    sum += item;
+                }
+
+                Console.WriteLine($"Total - {sum}");
+            } catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
-            
-            // task 1
-            Console.Write("Enter a second num: ");
-            int num1 = Convert.ToInt32(Console.ReadLine());
-            
-            Console.Write("Enter a second num: ");
-            int num2 = Convert.ToInt32(Console.ReadLine());
-            
-            Console.Write("Enter a third num: ");
-            int num3 = Convert.ToInt32(Console.ReadLine());;
-            
-            Console.Write("Enter a fourth num: ");
-            int num4 = Convert.ToInt32(Console.ReadLine());;
-            
 
-            string result = ShowNumbers(num1, num2, num3, num4);
-            Console.WriteLine(result);
-            
-            
-            // task 2
-            // reverse сделать числа 
-            Console.WriteLine("Введите шестизначное число: ");
-            int numbers = Convert.ToInt32(Console.ReadLine());
-            char[] reverseNumber = Convert.ToString(numbers).ToCharArray();
-            Array.Reverse(reverseNumber);
-            string reversed = string.Join("", reverseNumber);
-            Console.WriteLine(reversed);
+           
 
-            
-            // доп задания
-            Console.WriteLine("Enter a first number with user");
-            int userNum1 = Convert.ToInt32(Console.ReadLine());
-            
-            Console.WriteLine("Enter a second number with user");
-            int userNum2 = Convert.ToInt32(Console.ReadLine());
-            
-            Console.WriteLine("Enter a three number with user");
-            int userNum3 = Convert.ToInt32(Console.ReadLine());
+            // TASK 2
+            try
+            {
+                int size = 12;
+                int[] salaryCompany2 = new int[size];
+                var rnd = new Random();
+                int min = int.MaxValue;
+                int max = int.MinValue;
 
-            int sumUsers = userNum1 + userNum2 + userNum3;
-            int avarageMath = sumUsers / 3;
-            Console.WriteLine($"Cумма - {sumUsers}, medium avarage - {avarageMath}");
+                const int countMonth = 12;
+                const int rndMin = 100, rndMax = 2000;
+               
+        
+                for (int i = 0; i < countMonth; i++)
+                {
+                    salaryCompany2[i] = rnd.Next(rndMin, rndMax);
+                }
 
-            // task 2
-            Console.WriteLine("Enter a price one laptop: ");
-            double priceLaptop = Convert.ToDouble(Console.ReadLine());
+                for (int i = 0; i < salaryCompany2.Length; i++)
+                {
+                    if (salaryCompany2[i] <= min)
+                    {
+                        min = salaryCompany2[i];
+                    }
+                    if (salaryCompany2[i] >= max)
+                    {
+                        max = salaryCompany2[i];
+                    }
+                }
+                Console.WriteLine("----");
 
-            Console.WriteLine("Enter a quantity laptop: ");
-            int quantity = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine($"Min - {min}");
+                Console.WriteLine($"Max - {max}");
+                Console.WriteLine("----");
 
-            Console.WriteLine("Enter a procent discount: ");
-            double discount = Convert.ToDouble(Console.ReadLine()); // 20%
-            
-            double products = (priceLaptop * quantity);
-            double discountResult = (products / 100) * discount;
-            double productsResult = products - discountResult;
-          
-            Console.WriteLine($"Ваша сумма корзины учитывая скидку - {productsResult}");
-            
-            
-            // task 3
-            //  Завдання 3.
-             // Зарплата менеджера - 100 $ + 5% від продажів. Користувач вводить з клавіатури загальну суму угод менеджера протягом місяця. Порахувати підсумкову зарплату менеджера. 
-             
-            Console.WriteLine("Введите сумму со сделок за месяц: ");
-            int managerSumTrade = Convert.ToInt32(Console.ReadLine());
-            
-            int salaryTrade = managerSumTrade / 100 * 5;
-            int salaryManager = 100 + salaryTrade;
-            Console.WriteLine(salaryManager);
-            Console.WriteLine("Change from develop");
-            Console.WriteLine(1 + 1);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+
+            // TASK 3
+            try
+            {
+                int size = 5;
+                int[] numbers = new int[size];
+                int[] numbersUpdate = new int[numbers.Length - 1];
+                const int newValue = -1;
+
+
+                for (int i = 0; i < numbers.Length - 1; i++)
+                {
+                    numbersUpdate[i] = newValue;
+                }
+
+
+                foreach (int item in numbersUpdate)
+                {
+                    Console.WriteLine(item); // show
+                }
+            } 
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
         }
     }
 }
