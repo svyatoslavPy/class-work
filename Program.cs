@@ -1,100 +1,214 @@
-﻿using System;
-
-namespace ClassWork
+﻿namespace CSharpTutorials
 {
     class Program
     {
+        public static int Pow(int a, int b)
+        {
+            var result = 1;
+
+            if (b == 0) return 0;
+
+            for (int i = 0; i <= b; i++)
+            {
+                result *= a;
+            }
+
+            return result;
+        }
+    //
+        public static int SumNumbers(int a, int b)
+        {
+            var result = 0;
+            for (int i = a; i < b; i++)
+            {
+                result += i;
+            }
+
+            return result;
+        }
+
+        public static string isPerfectNumber(int number)
+        {
+            string messageIsPerfect = "Number is perfect";
+            string messageNotIsPerfect = "Number not is perfect";
+
+            var result = 0;
+
+            if (number <= 0) return messageNotIsPerfect;
+
+            for (int i = 1; i < number; i++)
+            {
+                if (number % i == 0)
+                {
+                    result += i;
+                }
+            }
+
+            return result == number ? messageIsPerfect : messageNotIsPerfect;
+        }
+
+        static void showInfo(int powNum, int sumNum, string perfectNum)
+        {
+            Console.WriteLine($"Result pow {powNum}");
+            Console.WriteLine($"Sum numbers - {sumNum}");
+            Console.WriteLine($"Perfect number - {perfectNum}");
+        }
 
         static void Main(string[] args)
         {
-
-            string message = "Hello World!!";
-            Console.WriteLine(1 + 5);
-            Console.WriteLine(message);
-            Console.WriteLine(1 + 5);
-
-            string ShowNumbers(params int[] numbers)
+            //  Написати функцію, яка приймає два параметри: основу ступеня та показник ступеня, та обчислює ступінь числа на основі отриманих даних.
+            try
             {
-                string num = "";
-                foreach (int i in numbers)
+                var resultPow = Pow(2, 3);
+                var resultSumNumbers = SumNumbers(2, 5);
+                var resultNumIsPerfect = isPerfectNumber(28);
+
+                showInfo(resultPow, resultSumNumbers, resultNumIsPerfect);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            // Написати функцію, яка отримує як параметри 2 цілих числа і повертає суму чисел з діапазону між ними.
+
+
+            //  Число називається досконалим,
+            //  якщо сума всіх його дільників
+            //  дорівнює йому самому.
+            //  Напишіть функцію пошуку таких чисел у введеному інтервалі.
+
+
+            // game cards
+            Console.OutputEncoding = System.Text.Encoding.Unicode;
+
+            Console.WriteLine("\t");
+            Console.WriteLine("Welcome to Game Cards: ");
+
+            const string makeHorizontal = "-";
+            const string makeVertical = "|";
+            const string space = " ";
+
+
+            int num;
+
+            string[] allCards =
+            {
+                "", "A ♣️", "2 ♣️", "3 ♣️", "4 ♣️", "5 ♣️", "6 ♣️", "7 ♣️", "8 ♣️", "9 ♣️", "10 ♣️", "11 ♣️", "12 ♣️",
+                "13 ♣️",
+                "A ♦️", "2 ♦️", "3 ♦️", "4 ♦️", "5 ♦️", "6 ♦️", "7 ♦️", "8 ♦️", "9 ♦️", "10 ♦️", "11 ♦️", "12 ♦️",
+                "13 ♦️",
+                "A ♥️", "2 ♥️", "3 ♥️", "4 ♥️", "5 ♥️", "6 ♥️", "7 ♥️", "8 ♥️", "9 ♥️", "10 ♥️", "11 ♥️", "12 ♥️",
+                "13 ♥️",
+                "A ♠️", "2 ♠️", "3 ♠️", "4 ♠️", "5 ♠️", "6 ♠️", "7 ♠️", "8 ♠️", "9 ♠️", "10 ♠️", "11 ♠️", "12 ♠️",
+                "13 ♠️"
+            };
+
+
+            static void PrintElement(string element)
+            {
+                Console.Write(element);
+            }
+
+
+            void ShowCards(string suit)
+            {
+                if (suit.Contains("♣️") || suit.Contains("♠️"))
                 {
-                    num += i;
+                    Console.ForegroundColor = ConsoleColor.Black;
+                }
+                else if (suit.Contains("♦️") || suit.Contains("♥️"))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
                 }
 
-                return num;
+                for (int i = 0; i < 9; i++)
+                {
+                    if (i == 4)
+                    {
+                        Console.WriteLine($"{makeVertical}  {suit}  {makeVertical}");
+                    }
+
+                    if (i == 0 || i == 8)
+                    {
+                        for (int j = 0; j < 9; j++)
+                        {
+                            PrintElement(makeHorizontal);
+                        }
+                    }
+                    else
+                    {
+                        PrintElement(makeVertical);
+
+
+                        for (int j = 0; j < 7; j++)
+                        {
+                            PrintElement(space);
+                        }
+
+                        PrintElement(makeVertical);
+                    }
+
+                    Console.WriteLine();
+                }
             }
             
-            // task 1
-            Console.Write("Enter a second num: ");
-            int num1 = Convert.ToInt32(Console.ReadLine());
-            
-            Console.Write("Enter a second num: ");
-            int num2 = Convert.ToInt32(Console.ReadLine());
-            
-            Console.Write("Enter a third num: ");
-            int num3 = Convert.ToInt32(Console.ReadLine());;
-            
-            Console.Write("Enter a fourth num: ");
-            int num4 = Convert.ToInt32(Console.ReadLine());;
-            
+            try
+            {
+                Console.WriteLine("\n");
+                do
+                {
+                    Console.Write("Enter a number: ");
+                    num = Convert.ToInt32(Console.ReadLine());
+                } while (num > 52);
 
-            string result = ShowNumbers(num1, num2, num3, num4);
-            Console.WriteLine(result);
-            
-            
-            // task 2
-            // reverse сделать числа 
-            Console.WriteLine("Введите шестизначное число: ");
-            int numbers = Convert.ToInt32(Console.ReadLine());
-            char[] reverseNumber = Convert.ToString(numbers).ToCharArray();
-            Array.Reverse(reverseNumber);
-            string reversed = string.Join("", reverseNumber);
-            Console.WriteLine(reversed);
+                if (num == 0)
+                {
+                    throw new Exception("Not have card this cards");
+                }
+                ShowCards(allCards[num]);
+            } 
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
 
+            static void checkLuckyNumber(int ticket)
+            {
+                int k = ticket / 1000 / 10 / 10;
+                int g = ticket / 1000 % 10;
+                int f = ticket / 1000 % 100 / 10;
             
-            // доп задания
-            Console.WriteLine("Enter a first number with user");
-            int userNum1 = Convert.ToInt32(Console.ReadLine());
-            
-            Console.WriteLine("Enter a second number with user");
-            int userNum2 = Convert.ToInt32(Console.ReadLine());
-            
-            Console.WriteLine("Enter a three number with user");
-            int userNum3 = Convert.ToInt32(Console.ReadLine());
+                int a = ticket % 10;
+                int b = ticket % 100 / 10;
+                int c = ticket % 1000 / 10 / 10;
 
-            int sumUsers = userNum1 + userNum2 + userNum3;
-            int avarageMath = sumUsers / 3;
-            Console.WriteLine($"Cумма - {sumUsers}, medium avarage - {avarageMath}");
-
-            // task 2
-            Console.WriteLine("Enter a price one laptop: ");
-            double priceLaptop = Convert.ToDouble(Console.ReadLine());
-
-            Console.WriteLine("Enter a quantity laptop: ");
-            int quantity = Convert.ToInt32(Console.ReadLine());
-
-            Console.WriteLine("Enter a procent discount: ");
-            double discount = Convert.ToDouble(Console.ReadLine()); // 20%
+                if ((k + g + f) == (a + b + c))
+                {
+                    Console.WriteLine("This lucky number");
+                }
+                else
+                {
+                    Console.WriteLine("This not lucky number");
+                }
+            }
             
-            double products = (priceLaptop * quantity);
-            double discountResult = (products / 100) * discount;
-            double productsResult = products - discountResult;
-          
-            Console.WriteLine($"Ваша сумма корзины учитывая скидку - {productsResult}");
-            
-            
-            // task 3
-            //  Завдання 3.
-             // Зарплата менеджера - 100 $ + 5% від продажів. Користувач вводить з клавіатури загальну суму угод менеджера протягом місяця. Порахувати підсумкову зарплату менеджера. 
-             
-            Console.WriteLine("Введите сумму со сделок за месяц: ");
-            int managerSumTrade = Convert.ToInt32(Console.ReadLine());
-            
-            int salaryTrade = managerSumTrade / 100 * 5;
-            int salaryManager = 100 + salaryTrade;
-            Console.WriteLine(salaryManager);
-            Console.WriteLine("Change from develop");
-            Console.WriteLine(1 + 1);
+            // task 4
+            int ticket;
+            try
+            {
+                do
+                {
+                    Console.WriteLine("Enter a your ticket: ");
+                    ticket = Convert.ToInt32(Console.ReadLine());
+                } while (Convert.ToString(ticket).Length < 6);
+                checkLuckyNumber(ticket);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }
+
