@@ -1,112 +1,214 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CSharpTutorials
+﻿namespace CSharpTutorials
 {
     class Program
     {
+        public static int Pow(int a, int b)
+        {
+            var result = 1;
+
+            if (b == 0) return 0;
+
+            for (int i = 0; i <= b; i++)
+            {
+                result *= a;
+            }
+
+            return result;
+        }
+
+        public static int SumNumbers(int a, int b)
+        {
+            var result = 0;
+            for (int i = a; i < b; i++)
+            {
+                result += i;
+            }
+
+            return result;
+        }
+
+        public static string isPerfectNumber(int number)
+        {
+            string messageIsPerfect = "Number is perfect";
+            string messageNotIsPerfect = "Number not is perfect";
+
+            var result = 0;
+
+            if (number <= 0) return messageNotIsPerfect;
+
+            for (int i = 1; i < number; i++)
+            {
+                if (number % i == 0)
+                {
+                    result += i;
+                }
+            }
+
+            return result == number ? messageIsPerfect : messageNotIsPerfect;
+        }
+
+        static void showInfo(int powNum, int sumNum, string perfectNum)
+        {
+            Console.WriteLine($"Result pow {powNum}");
+            Console.WriteLine($"Sum numbers - {sumNum}");
+            Console.WriteLine($"Perfect number - {perfectNum}");
+        }
+
         static void Main(string[] args)
         {
-            // TASK 1
+            //  Написати функцію, яка приймає два параметри: основу ступеня та показник ступеня, та обчислює ступінь числа на основі отриманих даних.
             try
             {
-                int size = 6;
-                int[] salaryCompany = new int[size];
-                int sum = 0;
-                int countMonth = 6;
+                var resultPow = Pow(2, 3);
+                var resultSumNumbers = SumNumbers(2, 5);
+                var resultNumIsPerfect = isPerfectNumber(28);
 
-                for (int i = 0; i < countMonth; i++)
-                {
-                    Console.Write("Enter a salary: ");
-                    int salary = Convert.ToInt32(Console.ReadLine());
-
-                    salaryCompany[i] = salary;
-                }
-
-                foreach (var item in salaryCompany)
-                {
-                    sum += item;
-                }
-
-                Console.WriteLine($"Total - {sum}");
-            } catch (Exception ex)
+                showInfo(resultPow, resultSumNumbers, resultNumIsPerfect);
+            }
+            catch (Exception e)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine(e.Message);
             }
 
-           
+            // Написати функцію, яка отримує як параметри 2 цілих числа і повертає суму чисел з діапазону між ними.
 
-            // TASK 2
-            try
+
+            //  Число називається досконалим,
+            //  якщо сума всіх його дільників
+            //  дорівнює йому самому.
+            //  Напишіть функцію пошуку таких чисел у введеному інтервалі.
+
+
+            // game cards
+            Console.OutputEncoding = System.Text.Encoding.Unicode;
+
+            Console.WriteLine("\t");
+            Console.WriteLine("Welcome to Game Cards: ");
+
+            const string makeHorizontal = "-";
+            const string makeVertical = "|";
+            const string space = " ";
+
+
+            int num;
+
+            string[] allCards =
             {
-                int size = 12;
-                int[] salaryCompany2 = new int[size];
-                var rnd = new Random();
-                int min = int.MaxValue;
-                int max = int.MinValue;
+                "", "A ♣️", "2 ♣️", "3 ♣️", "4 ♣️", "5 ♣️", "6 ♣️", "7 ♣️", "8 ♣️", "9 ♣️", "10 ♣️", "11 ♣️", "12 ♣️",
+                "13 ♣️",
+                "A ♦️", "2 ♦️", "3 ♦️", "4 ♦️", "5 ♦️", "6 ♦️", "7 ♦️", "8 ♦️", "9 ♦️", "10 ♦️", "11 ♦️", "12 ♦️",
+                "13 ♦️",
+                "A ♥️", "2 ♥️", "3 ♥️", "4 ♥️", "5 ♥️", "6 ♥️", "7 ♥️", "8 ♥️", "9 ♥️", "10 ♥️", "11 ♥️", "12 ♥️",
+                "13 ♥️",
+                "A ♠️", "2 ♠️", "3 ♠️", "4 ♠️", "5 ♠️", "6 ♠️", "7 ♠️", "8 ♠️", "9 ♠️", "10 ♠️", "11 ♠️", "12 ♠️",
+                "13 ♠️"
+            };
 
-                const int countMonth = 12;
-                const int rndMin = 100, rndMax = 2000;
-               
-        
-                for (int i = 0; i < countMonth; i++)
+
+            static void PrintElement(string element)
+            {
+                Console.Write(element);
+            }
+
+
+            void ShowCards(string suit)
+            {
+                if (suit.Contains("♣️") || suit.Contains("♠️"))
                 {
-                    salaryCompany2[i] = rnd.Next(rndMin, rndMax);
+                    Console.ForegroundColor = ConsoleColor.Black;
+                }
+                else if (suit.Contains("♦️") || suit.Contains("♥️"))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
                 }
 
-                for (int i = 0; i < salaryCompany2.Length; i++)
+                for (int i = 0; i < 9; i++)
                 {
-                    if (salaryCompany2[i] <= min)
+                    if (i == 4)
                     {
-                        min = salaryCompany2[i];
+                        Console.WriteLine($"{makeVertical}  {suit}  {makeVertical}");
                     }
-                    if (salaryCompany2[i] >= max)
+
+                    if (i == 0 || i == 8)
                     {
-                        max = salaryCompany2[i];
+                        for (int j = 0; j < 9; j++)
+                        {
+                            PrintElement(makeHorizontal);
+                        }
                     }
+                    else
+                    {
+                        PrintElement(makeVertical);
+
+
+                        for (int j = 0; j < 7; j++)
+                        {
+                            PrintElement(space);
+                        }
+
+                        PrintElement(makeVertical);
+                    }
+
+                    Console.WriteLine();
                 }
-                Console.WriteLine("----");
-
-                Console.WriteLine($"Min - {min}");
-                Console.WriteLine($"Max - {max}");
-                Console.WriteLine("----");
-
-
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-
-
-            // TASK 3
+            
             try
             {
-                int size = 5;
-                int[] numbers = new int[size];
-                int[] numbersUpdate = new int[numbers.Length - 1];
-                const int newValue = -1;
-
-
-                for (int i = 0; i < numbers.Length - 1; i++)
+                Console.WriteLine("\n");
+                do
                 {
-                    numbersUpdate[i] = newValue;
-                }
+                    Console.Write("Enter a number: ");
+                    num = Convert.ToInt32(Console.ReadLine());
+                } while (num > 52);
 
-
-                foreach (int item in numbersUpdate)
+                if (num == 0)
                 {
-                    Console.WriteLine(item); // show
+                    throw new Exception("Not have card this cards");
                 }
+                ShowCards(allCards[num]);
             } 
-            catch (Exception ex)
+            catch (Exception e)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine(e.Message);
             }
 
+            static void checkLuckyNumber(int ticket)
+            {
+                int k = ticket / 1000 / 10 / 10;
+                int g = ticket / 1000 % 10;
+                int f = ticket / 1000 % 100 / 10;
+            
+                int a = ticket % 10;
+                int b = ticket % 100 / 10;
+                int c = ticket % 1000 / 10 / 10;
+
+                if ((k + g + f) == (a + b + c))
+                {
+                    Console.WriteLine("This lucky number");
+                }
+                else
+                {
+                    Console.WriteLine("This not lucky number");
+                }
+            }
+            
+            // task 4
+            int ticket;
+            try
+            {
+                do
+                {
+                    Console.WriteLine("Enter a your ticket: ");
+                    ticket = Convert.ToInt32(Console.ReadLine());
+                } while (Convert.ToString(ticket).Length < 6);
+                checkLuckyNumber(ticket);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }
+
