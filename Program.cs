@@ -63,7 +63,7 @@
                         numbers[j + 1] = temp;
                     }
                 }
-            }
+            }//
 
             for (int i = 0; i < numbers.Length; i++) {
                 Console.Write(numbers[i] + " ");
