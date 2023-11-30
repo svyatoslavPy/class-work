@@ -1,74 +1,136 @@
 ﻿namespace App
 {
-    class Program
+    class TodoList
     {
-
-        /*
-         *
-         *  for (int i = 0; i < numbers.Length; i++) 
-                // пробегаемся повверх циклом
-                // для того чтобы повторить
-                // сортировку такое кол-во раз
-                // сколько у нас всего элементов в массиве
-            {
-                for (int j = 0; j < numbers.Length - i - 1; j++) 
-                    // пробегаемся по массиву и
-                    // на каждой итерации сдвигаем
-                    // и также на шаг меньше чтобы
-                    // сорт заканчивался
-                    // на предпоследнем элементе
-                {
-                    if (numbers[j] > numbers[j + 1]) // если текущее число больше чем то которое спереди
-                    {
-                        (numbers[j], numbers[j + 1]) = (numbers[j + 1], numbers[j]); // swap
-                    }
-                }
-            }
-         *
-         * 
-         */
-        static Random CreateRandomNumber()
+        static void ShowMenuTodo()
         {
-            var rnd = new Random();
-            return rnd;
+            Console.WriteLine("Welcome to Todo-list: ");
+            Console.WriteLine();
+            Console.WriteLine("Manual todolist");
+            Console.WriteLine("Add - Please enter A");
+            Console.WriteLine("Delete - Please enter D");
+            Console.WriteLine("Edit - Please enter E");
+            Console.WriteLine("Exit in menu - Q");
+            Console.WriteLine("---------------------");
         }
 
-        static int[] InitRandomNumbers(int[] numbers, int start = 1, int end = 100)
+        static void ShowTodolist(List<string?> todoList)
         {
-            var rnd = CreateRandomNumber();
-
-            for (int i = 0; i < numbers.Length; i++)
+            Console.WriteLine("---------------------");
+            Console.WriteLine("Todolist: ");
+            
+            foreach (var todo in todoList)
             {
-                numbers[i] = rnd.Next(start, end);
+                Console.WriteLine(todo);
+            }
+        }
+
+        static void Add(List<string?> todoList, string? task)
+        {
+            string? haveTodoIsTask = todoList.Find((item) => item == task);
+
+            if (haveTodoIsTask == task)
+            {
+                throw new Exception("Have this todo in todolist");
             }
 
-            return numbers;
+            todoList.Add(task);
+        }
+
+        static void Edit(List<string?> todoList, string? task, string? newTask)
+        {
+            int idxFoundTask = todoList.FindIndex((item) => item == task);
+            if (idxFoundTask == -1)
+            {
+                throw new Exception("Not found this todo for edit");
+            }
+
+            if (task == "" || newTask == "")
+            {
+                throw new Exception("Not have task or new task for edit");
+            }
+
+            todoList[idxFoundTask] = newTask;
+        }
+
+        static void Delete(List<string?> todoList, string? task)
+        {
+            int idxFoundTask = todoList.FindIndex((item) => item == task);
+
+            if (idxFoundTask == -1)
+            {
+                throw new Exception("Not found this todo for delete");
+            }
+
+            todoList.RemoveAt(idxFoundTask);
         }
 
         static void Main(string[] args)
         {
-            int sizeNumbers = 30;
-            int[] numbers = new int[sizeNumbers];
-            InitRandomNumbers(numbers);
+            List<string?> todoList = new List<string?>(); // general list for todolist
+            bool isPressedKey = true; // pressed key
 
-            // BUBLE SORT
-            for (int i = 0; i < numbers.Length; i++)
+            ShowMenuTodo(); // MENU
+
+            try
             {
-                for (int j = 0; j < numbers.Length - i - 1; j++)
+                do
                 {
-                    if (numbers[j] > numbers[j + 1])
-                    {
-                        int temp = numbers[j];
-                        numbers[j] = numbers[j + 1];
-                        numbers[j + 1] = temp;
-                    }
-                }
-            }//
+                    Console.Write("Please enter your key: ");
+                    var key = Console.ReadKey();
 
-            for (int i = 0; i < numbers.Length; i++) {
-                Console.Write(numbers[i] + " ");
+                    if (key.Key == ConsoleKey.A) // add task
+                    {
+                        Console.WriteLine();
+                        Console.Write("Please enter your task: ");
+                        string? task = Console.ReadLine();
+
+                        Add(todoList, task);
+                    }
+                    else if (key.Key == ConsoleKey.E) // edit
+                    {
+                        Console.WriteLine();
+                        Console.Write("Please enter your task: ");
+                        string? task = Console.ReadLine();
+                        Console.Write("Please enter your new task: ");
+                        string? newTask = Console.ReadLine();
+
+                        Edit(todoList, task, newTask);
+                    }
+                    else if (key.Key == ConsoleKey.D) // delete
+                    {
+                        Console.WriteLine();
+                        Console.Write("Please enter your task: ");
+                        string? task = Console.ReadLine();
+
+                        Delete(todoList, task);
+                    }
+                    else if (key.Key == ConsoleKey.Q)
+                    {
+                        Console.WriteLine();
+                        isPressedKey = false;
+                    }
+                    else
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("Not correct key");
+                        isPressedKey = false;
+                    }
+                } while (isPressedKey);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            try
+            {
+                ShowTodolist(todoList);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
         }
     }
 }
-
