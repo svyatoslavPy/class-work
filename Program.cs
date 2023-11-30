@@ -1,11 +1,14 @@
-﻿namespace App
+﻿
+
+namespace App
 {
     class TodoList
     {
         static void ShowMenuTodo()
         {
+            
             Console.WriteLine("Welcome to Todo-list: ");
-            Console.WriteLine();
+            Console.WriteLine("---------------------");
             Console.WriteLine("Manual todolist");
             Console.WriteLine("Add - Please enter A");
             Console.WriteLine("Delete - Please enter D");
@@ -84,6 +87,13 @@
                         Console.WriteLine();
                         Console.Write("Please enter your task: ");
                         string? task = Console.ReadLine();
+
+                        bool taskNotString = task != null && task.All(char.IsNumber);
+                   
+                        if (taskNotString)
+                        {
+                            throw new Exception("This task not string");
+                        }
 
                         Add(todoList, task);
                     }
