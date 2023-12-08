@@ -50,8 +50,9 @@ namespace App
                 Console.WriteLine("Bad email");
             }
 
-            string fullName = "Georgiyev Svyatoslav Sergeyevich";
-            Regex regexFullName = new Regex(@"^([A-Z]+[a-z]+[ ]+[A-Z]+[a-z]+[ ]+[A-Z]+[a-z]+)$");
+            string fullName = "Svyatoslav Sergeyevich";
+            Regex regexFullName = new Regex(@"^([A-Z][a-z]{1,29}[ ]+[A-Z][a-z]{1,29})$");
+            
 
             if (regexFullName.Match(fullName).Success)
             {
