@@ -1,100 +1,146 @@
-﻿using System;
+﻿
 
-namespace ClassWork
+namespace App
 {
-    class Program
+    class TodoList
     {
+        static void ShowMenuTodo()
+        {
+            
+            Console.WriteLine("Welcome to Todo-list: ");
+            Console.WriteLine("---------------------");
+            Console.WriteLine("Manual todolist");
+            Console.WriteLine("Add - Please enter A");
+            Console.WriteLine("Delete - Please enter D");
+            Console.WriteLine("Edit - Please enter E");
+            Console.WriteLine("Exit in menu - Q");
+            Console.WriteLine("---------------------");
+        }
+
+        static void ShowTodolist(List<string?> todoList)
+        {
+            Console.WriteLine("---------------------");
+            Console.WriteLine("Todolist: ");
+            
+            foreach (var todo in todoList)
+            {
+                Console.WriteLine(todo);
+            }
+        }
+
+        static void Add(List<string?> todoList, string? task)
+        {
+            string? haveTodoIsTask = todoList.Find((item) => item == task);
+
+            if (haveTodoIsTask == task)
+            {
+                throw new Exception("Have this todo in todolist");
+            }
+
+            todoList.Add(task);
+        }
+
+        static void Edit(List<string?> todoList, string? task, string? newTask)
+        {
+            int idxFoundTask = todoList.FindIndex((item) => item == task);
+            if (idxFoundTask == -1)
+            {
+                throw new Exception("Not found this todo for edit");
+            }
+
+            if (task == "" || newTask == "")
+            {
+                throw new Exception("Not have task or new task for edit");
+            }
+
+            todoList[idxFoundTask] = newTask;
+        }
+
+        static void Delete(List<string?> todoList, string? task)
+        {
+            int idxFoundTask = todoList.FindIndex((item) => item == task);
+
+            if (idxFoundTask == -1)
+            {
+                throw new Exception("Not found this todo for delete");
+            }
+
+            todoList.RemoveAt(idxFoundTask);
+        }
 
         static void Main(string[] args)
         {
+            List<string?> todoList = new List<string?>(); // general list for todolist
+            bool isPressedKey = true; // pressed key
 
-            string message = "Hello World!!";
-            Console.WriteLine(1 + 5);
-            Console.WriteLine(message);
-            Console.WriteLine(1 + 5);
+            ShowMenuTodo(); // MENU
 
-            string ShowNumbers(params int[] numbers)
+            try
             {
-                string num = "";
-                foreach (int i in numbers)
+                do
                 {
-                    num += i;
-                }
+                    Console.Write("Please enter your key: ");
+                    var key = Console.ReadKey();
 
-                return num;
+                    if (key.Key == ConsoleKey.A) // add task
+                    {
+                        Console.WriteLine();
+                        Console.Write("Please enter your task: ");
+                        string? task = Console.ReadLine();
+
+                        bool taskNotString = task != null && task.All(char.IsNumber);
+                   
+                        if (taskNotString)
+                        {
+                            throw new Exception("This task not string");
+                        }
+
+                        Add(todoList, task);
+                    }
+                    else if (key.Key == ConsoleKey.E) // edit
+                    {
+                        Console.WriteLine();
+                        Console.Write("Please enter your task: ");
+                        string? task = Console.ReadLine();
+                        Console.Write("Please enter your new task: ");
+                        string? newTask = Console.ReadLine();
+
+                        Edit(todoList, task, newTask);
+                    }
+                    else if (key.Key == ConsoleKey.D) // delete
+                    {
+                        Console.WriteLine();
+                        Console.Write("Please enter your task: ");
+                        string? task = Console.ReadLine();
+
+                        Delete(todoList, task);
+                    }
+                    else if (key.Key == ConsoleKey.Q)
+                    {
+                        Console.WriteLine();
+                        isPressedKey = false;
+                    }
+                    else
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("Not correct key");
+                        isPressedKey = false;
+                    }
+                } while (isPressedKey);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
             
-            // task 1
-            Console.Write("Enter a second num: ");
-            int num1 = Convert.ToInt32(Console.ReadLine());
-            
-            Console.Write("Enter a second num: ");
-            int num2 = Convert.ToInt32(Console.ReadLine());
-            
-            Console.Write("Enter a third num: ");
-            int num3 = Convert.ToInt32(Console.ReadLine());;
-            
-            Console.Write("Enter a fourth num: ");
-            int num4 = Convert.ToInt32(Console.ReadLine());;
-            
-
-            string result = ShowNumbers(num1, num2, num3, num4);
-            Console.WriteLine(result);
-            
-            
-            // task 2
-            // reverse сделать числа 
-            Console.WriteLine("Введите шестизначное число: ");
-            int numbers = Convert.ToInt32(Console.ReadLine());
-            char[] reverseNumber = Convert.ToString(numbers).ToCharArray();
-            Array.Reverse(reverseNumber);
-            string reversed = string.Join("", reverseNumber);
-            Console.WriteLine(reversed);
-
-            
-            // доп задания
-            Console.WriteLine("Enter a first number with user");
-            int userNum1 = Convert.ToInt32(Console.ReadLine());
-            
-            Console.WriteLine("Enter a second number with user");
-            int userNum2 = Convert.ToInt32(Console.ReadLine());
-            
-            Console.WriteLine("Enter a three number with user");
-            int userNum3 = Convert.ToInt32(Console.ReadLine());
-
-            int sumUsers = userNum1 + userNum2 + userNum3;
-            int avarageMath = sumUsers / 3;
-            Console.WriteLine($"Cумма - {sumUsers}, medium avarage - {avarageMath}");
-
-            // task 2
-            Console.WriteLine("Enter a price one laptop: ");
-            double priceLaptop = Convert.ToDouble(Console.ReadLine());
-
-            Console.WriteLine("Enter a quantity laptop: ");
-            int quantity = Convert.ToInt32(Console.ReadLine());
-
-            Console.WriteLine("Enter a procent discount: ");
-            double discount = Convert.ToDouble(Console.ReadLine()); // 20%
-            
-            double products = (priceLaptop * quantity);
-            double discountResult = (products / 100) * discount;
-            double productsResult = products - discountResult;
-          
-            Console.WriteLine($"Ваша сумма корзины учитывая скидку - {productsResult}");
-            
-            
-            // task 3
-            //  Завдання 3.
-             // Зарплата менеджера - 100 $ + 5% від продажів. Користувач вводить з клавіатури загальну суму угод менеджера протягом місяця. Порахувати підсумкову зарплату менеджера. 
-             
-            Console.WriteLine("Введите сумму со сделок за месяц: ");
-            int managerSumTrade = Convert.ToInt32(Console.ReadLine());
-            
-            int salaryTrade = managerSumTrade / 100 * 5;
-            int salaryManager = 100 + salaryTrade;
-            Console.WriteLine(salaryManager);
-            Console.WriteLine("Change from develop");
-            Console.WriteLine(1 + 1);
+            try
+            {
+                ShowTodolist(todoList);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }
